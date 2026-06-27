@@ -2,39 +2,117 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Generador de Caligramas</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:40px;text-align:center}
-.card{max-width:800px;margin:auto;background:#fff;padding:25px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
-input{width:80%;padding:12px;font-size:18px}
-button{padding:12px 20px;font-size:18px;margin-top:15px;cursor:pointer}
-pre{white-space:pre-wrap;font-family:monospace;font-size:18px;margin-top:20px}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.card{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,0,0,.15);
+    width:90%;
+    max-width:700px;
+    text-align:center;
+}
+input,select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    font-size:16px;
+}
+button{
+    padding:12px 20px;
+    font-size:18px;
+    cursor:pointer;
+}
+pre{
+    background:#111;
+    color:#00ff88;
+    padding:15px;
+    text-align:left;
+    white-space:pre-wrap;
+    margin-top:20px;
+}
 </style>
 </head>
+
 <body>
+
 <div class="card">
+
 <h1>Generador de Caligramas</h1>
-<p>Escribe una palabra y presiona el botón.</p>
-<input id="txt" placeholder="Ejemplo: Árbol">
-<br>
-<button onclick="g()">Generar caligrama</button>
-<pre id="out"></pre>
+
+<p>Escribe una palabra y elige una forma.</p>
+
+<input id="palabra" placeholder="Ejemplo: Árbol">
+
+<select id="forma">
+<option>Árbol</option>
+<option>Corazón</option>
+<option>Estrella</option>
+</select>
+
+<button onclick="generar()">Generar caligrama</button>
+
+<pre id="salida"></pre>
+
 </div>
+
 <script>
-function g(){
- let w=document.getElementById('txt').value.trim();
- if(!w){document.getElementById('out').textContent="Escribe una palabra.";return;}
- let s="";
- for(let i=0;i<w.length;i++){
-   s+=" ".repeat(i)+w[i].toUpperCase()+"\n";
- }
- s+="\n"+w.toUpperCase()+"\n";
- for(let i=w.length-1;i>=0;i--){
-   s+=" ".repeat(i)+w[i].toUpperCase()+"\n";
- }
- document.getElementById('out').textContent=s;
+function generar(){
+
+let palabra=document.getElementById("palabra").value;
+
+if(palabra==""){
+alert("Escribe una palabra");
+return;
+}
+
+let forma=document.getElementById("forma").value;
+
+let texto="";
+
+if(forma=="Árbol"){
+texto=
+"      "+palabra+"\n"+
+"    "+palabra+" "+palabra+"\n"+
+"  "+palabra+" "+palabra+" "+palabra+"\n"+
+"        ||\n"+
+"        ||";
+}
+
+if(forma=="Corazón"){
+texto=
+" "+palabra+"   "+palabra+"\n"+
+palabra+" "+palabra+" "+palabra+" "+palabra+"\n"+
+" "+palabra+" "+palabra+" "+palabra+"\n"+
+"   "+palabra+" "+palabra+"\n"+
+"      "+palabra;
+}
+
+if(forma=="Estrella"){
+texto=
+"    *\n"+
+"   *\n"+
+"** "+palabra+" **\n"+
+"   *\n"+
+"    *";
+}
+
+document.getElementById("salida").textContent=texto;
+
 }
 </script>
+
 </body>
 </html>
