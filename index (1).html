@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generador de Caligramas</title>
+<style>
+body{margin:0;font-family:Arial;background:#eef3ff}
+.card{max-width:900px;margin:40px auto;background:white;padding:25px;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.15);text-align:center}
+input,select{padding:10px;font-size:18px;margin:8px}
+button{padding:12px 20px;font-size:18px;border:none;border-radius:8px;background:#2563eb;color:#fff;cursor:pointer}
+pre{font-size:16px;white-space:pre-wrap;text-align:left;background:#f7f7f7;padding:20px;border-radius:10px;min-height:250px}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Generador de Caligramas</h1>
+<p>Escribe una palabra y elige una forma.</p>
+<input id="palabra" placeholder="Ejemplo: MEDICINA">
+<select id="forma">
+<option>Árbol</option>
+<option>Corazón</option>
+<option>Estrella</option>
+</select>
+<button onclick="gen()">Generar</button>
+<pre id="salida"></pre>
+</div>
+<script>
+function gen(){
+const t=document.getElementById("palabra").value.trim().toUpperCase();
+if(!t){alert("Escribe una palabra");return;}
+const f=document.getElementById("forma").value;
+let out="";
+if(f==="Árbol"){
+for(let i=1;i<=t.length;i++) out+=" ".repeat(t.length-i)+t.slice(0,i)+"\n";
+out+="| |\n|_|";
+}else if(f==="Corazón"){
+out+=" ♥ ♥\n";
+out+=t+"\n";
+out+=" ♥♥♥\n  ♥";
+}else{
+out+="   *\n";
+out+="  ***\n";
+out+=t+"\n";
+out+=" *****";
+}
+document.getElementById("salida").textContent=out;
+}
+</script>
+</body>
+</html>
